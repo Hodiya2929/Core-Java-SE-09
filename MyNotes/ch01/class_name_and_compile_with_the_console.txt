@@ -1,0 +1,26 @@
+In Java, the class name or the full class name is the package name + the class name. 
+The package name expresses the folders structure - for example if the full class name is: package ch01.sec01
+
+
+package ch01.sec01;
+
+// Our first Java program
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+
+
+Then inside the "ch01" folder, there is a "sec01" folder, and there HelloWorld.java file.
+In order to compile a java program with the console need to use in "javac" command - it will create a .class file (java byte code) in the same folder, but if we want
+to run the program, type the "java" command with the whole class name (e.g., ch01.sec01.HelloWorld) - we must be in the same folder where ch01
+is located, open the console and there type "java ch01.sec01.HelloWorld".
+Otherwise, the class loader will not find the class because once a class is part of a package - we must run it with the full name. 
+"javac" - call java compiler, and "java" call JVM - java virtual machine.
+
+In Java, not all java values are objects; some of them are primitive types. There are eight primitive types: byte, short, int, long, float, double, char,
+and boolean.
+
+
