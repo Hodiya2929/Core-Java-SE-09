@@ -1,0 +1,11 @@
+Not in the book.
+Java disassembler is a tool used to get information on any class file or interface file.
+Class files are java files that were compiled and now contain: java byte code, which is a language used by the JVM to generate an assembly code.
+Suppose we have a class file (use the command 'javac' as explained in a former text file.) - open the console in the class file path and enter:
+ "javap class_file_name."
+ javap prints its output to stdout so that the output will be in the console.
+When running javap with no parameters, it prints out the package, protected, and public fields and methods of the classes passed.
+We can use some parameters to get beneficial information on the class files:
+ "javap -c class_file_name."
+-c is a parameter that prints out disassembled code, i.e., the instructions that comprise the Java bytecodes, for each of the methods in the class. These are documented in the Java Virtual Machine specifications.
+There are more valuable parameters that can be used to get information on the class files.
