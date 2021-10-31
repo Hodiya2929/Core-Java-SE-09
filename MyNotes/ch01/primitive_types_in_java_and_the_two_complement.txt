@@ -1,0 +1,55 @@
+So in java, there are eight primitive types: 
+Four of them are signed integer values: byte, short, int, long.
+Two of them are for signed floating-point numbers: double, float.
+One for characters (used for string encoding): char.
+One for boolean values: boolean.
+
+suffix and prefix:
+Long has an 'L' suffix (4000000000L) 
+Hexadecimal has an "0x" prefix (0xCAFEBABE)
+Binary values have "0b" prefix (0b1001).
+For "byte" and "short," there is no prefix/suffix, and we can use casting.
+
+byte byteNum = (byte)34;
+
+Here is a tricky question,  what will be the output here:
+int castIntegerToByte= (byte)128;
+System.out.println(castIntegerToByte);
+
+Let us figure it out step by step:
+A byte is a signed type. A byte uses 8 bits in memory, so there are 256 options that it can represent. So when half of the numbers are positive, and half are negative - a byte can store the values: -128 to +127.
+Suppose we defined an integer and assigned the value 128 in it.
+int num = 128;
+So num is a variable that looks like this: (without relating to BigEndian/LittleEndian)
+00000000  00000000  00000000  10000000
+The first left digit is zero - for positive number representation.
+We "ordered" the computer to cast (convert) 128 to a byte - and byte is 8 bits long, so it copies the eight bits. What is the value of
+10000000 when it is stored in a byte?
+To know the answer, we must understand how numbers are represented in memory -  The Two's complement method.
+The two's complement method is the method in which numbers are stored in memory: 
+Positive numbers - the first bit (without relating to BigEndian/LittleEndian) is 0, and the rest of the bits are the value in binary, e.g., suppose we use 8 bits, and we want to store the number 5 - 00000101.
+Negative numbers - the first bit (without relating to BigEndian/LittleEndian) is 1, and the rest of the bits are the value. How to get the value? 
+Calculate the number in positive form in binary.
+Invert the digits
+Add 1.
+Suppose we want to get -5 in two's complement method:
+00000101
+11111010
+11111011
+We got 11111011. 
+(This explanation of the two's complement is pretty basic, there are many advantages to this method - look for it on the web)
+Back to our problem: we copied the 8 bits, and we wanted to know which number is it, but now we need the opposite way - we know that this number is negative, so all we need to do is the opposite:
+Subtract 1
+Invert the digits
+Here it is
+However, here we have a problem: among all numbers, we chose the one number that cannot be represented in its positive form by a byte variable (the maximum value assigned in a byte variable is 127).
+good to know:
+The zero is neither negative nor positive, but the sign bit of zero in the two complement representations is 0 (positive).
+So let take as an example the byte. Two hundred fifty-six numbers can be represented with a byte (2^8). 
+We always use a row of zeros to represent zero, so now there are 255 options left - 127 can be assigned to positive numbers and 128 to negative numbers. 
+So there is symmetry between 1 to 127 to -1 and -127, but there is always the last option:
+prefix one and the rest 0's (for the byte option, it's: 10000000). So the obvious thing to do is to use this option for the following negative number because it has a negative prefix - 1. 
+The inconvenient thing is that we cannot use the conversion method to get which number it is. 
+So for one option, it is always good to remember that one followed by zeros is the maximum negative number.
+
+
